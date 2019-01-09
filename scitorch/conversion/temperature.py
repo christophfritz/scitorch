@@ -14,17 +14,17 @@ def to_kelvin(val=0.0, scale='k'):
 
     :returns
 
-    kelvin -- (Tensor and float/list) torch.tensor with converted values and Python number or list
+    temp -- (Tensor) value in Kelvin scale
     """
     temp = _create_tensor(val)
     if scale == 'k':
-        kelvin = temp
+        temp = temp
     if scale == 'c':
-        kelvin = temp + 273.15
+        temp = temp + 273.15
     if scale == 'f':
-        kelvin = (temp - 32) * 5/9 + 273.15
+        temp = (temp - 32) * 5/9 + 273.15
 
-    return kelvin, kelvin.tolist()
+    return temp
 
 def to_celsius(val=0.0, scale='c'):
     """Converts a value from Kelvin/Fahrenheit to Celsius.
@@ -36,15 +36,15 @@ def to_celsius(val=0.0, scale='c'):
 
     :returns
 
-    celsius -- (float/list) Python number or list
+    temp -- (Tensor) value in Celsius scale
     """
-    temp, _ = to_kelvin(val, scale)
     if scale =='c':
-        celsius = _create_tensor(val)
+        temp = _create_tensor(val)
     else:
-        celsius = temp - 273.15
+        temp = to_kelvin(val, scale)
+        temp = temp - 273.15
 
-    return celsius.tolist()
+    return temp
 
 def to_fahrenheit(val=0.0, scale='f'):
     """Converts a value from Kelvin/Celsius to Fahrenheit.
@@ -56,13 +56,13 @@ def to_fahrenheit(val=0.0, scale='f'):
 
     :returns
 
-    fahrenheit -- (float/list) Python number or list
+    temp -- (Tensor) value in Fahrenheit scale
     """
 
-    temp, _ = to_kelvin(val, scale)
     if scale == 'f':
-        fahrenheit = _create_tensor(val)
+        temp = _create_tensor(val)
     else:
-        fahrenheit = (temp - 273.15) * 9/5 + 32
+        temp = to_kelvin(val, scale)
+        temp = (temp - 273.15) * 9/5 + 32
 
-    return fahrenheit.tolist()
+    return temp
