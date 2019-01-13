@@ -2,7 +2,7 @@ import torch
 from scitorch._globals import DEVICE as device
 
 def _create_tensor(val):
-    return torch.tensor(val, device=device, dtype=torch.float64)
+    return torch.as_tensor(val, device=device, dtype=torch.float64)
 
 def to_kelvin(val=0.0, scale='k'):
     """Converts a value from Celsius/Fahrenheit to Kelvin.
