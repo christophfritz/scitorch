@@ -1,3 +1,5 @@
+"""Conversion of different temperature scales (Kelvin, Fahrenheit and Celsius)."""
+
 import torch
 from scitorch._globals import DEVICE as device
 
@@ -11,7 +13,7 @@ def to_kelvin(val=0.0, scale='k'):
     -----------
 
     val -- (int) value
-    scale -- (char) scale that the value is in
+    scale -- (char) new scale
 
     Returns:
     --------
@@ -43,7 +45,7 @@ def to_celsius(val=0.0, scale='c'):
     -----------
 
     val -- (int) value
-    scale -- (char) scale that the value is in
+    scale -- (char) new scale
 
     Returns:
     --------
@@ -74,7 +76,7 @@ def to_fahrenheit(val=0.0, scale='f'):
     -----------
 
     val -- (int) value
-    scale -- (char) scale that the value is in
+    scale -- (char) new scale
 
     Returns:
     --------
