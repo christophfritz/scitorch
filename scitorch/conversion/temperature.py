@@ -7,14 +7,24 @@ def _create_tensor(val):
 def to_kelvin(val=0.0, scale='k'):
     """Converts a value from Celsius/Fahrenheit to Kelvin.
 
-    :arg
+    Parameters:
+    -----------
 
     val -- (int) value
-    scale -- (char) scale
+    scale -- (char) scale that the value is in
 
-    :returns
+    Returns:
+    --------
 
     temp -- (Tensor) value in Kelvin scale
+
+    Example:
+    --------
+
+    >>> fahrenheit = 32
+    >>> temperature.to_kelvin(fahrenheit, 'f')
+    tensor(273.1500, dtype=torch.float64)
+
     """
     temp = _create_tensor(val)
     if scale == 'k':
@@ -29,15 +39,26 @@ def to_kelvin(val=0.0, scale='k'):
 def to_celsius(val=0.0, scale='c'):
     """Converts a value from Kelvin/Fahrenheit to Celsius.
 
-    :arg
+    Parameters:
+    -----------
 
     val -- (int) value
-    scale -- (char) scale
+    scale -- (char) scale that the value is in
 
-    :returns
+    Returns:
+    --------
 
-    temp -- (Tensor) value in Celsius scale
+    temp -- (Tensor) value in Kelvin scale
+
+    Example:
+    --------
+
+    >>> kelvin = 0
+    >>> temperature.to_celsius(kelvin, 'k')
+    tensor(-273.1500, dtype=torch.float64)
+
     """
+
     if scale =='c':
         temp = _create_tensor(val)
     else:
@@ -49,14 +70,24 @@ def to_celsius(val=0.0, scale='c'):
 def to_fahrenheit(val=0.0, scale='f'):
     """Converts a value from Kelvin/Celsius to Fahrenheit.
 
-    :arg
+    Parameters:
+    -----------
 
     val -- (int) value
-    scale -- (char) scale
+    scale -- (char) scale that the value is in
 
-    :returns
+    Returns:
+    --------
 
-    temp -- (Tensor) value in Fahrenheit scale
+    temp -- (Tensor) value in Kelvin scale
+
+    Example:
+    --------
+
+    >>> celsius = 0
+    >>> temperature.to_fahrenheit(celsius, 'c')
+    tensor(32., dtype=torch.float64)
+
     """
 
     if scale == 'f':
