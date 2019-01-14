@@ -1,11 +1,12 @@
 import torch
 
 from pytest import raises
-from scitorch.conversion.temperature import to_kelvin, to_celsius, to_fahrenheit, _create_tensor
+from scitorch.tools._tensors import _create_tensor
+from scitorch.conversion.temperature import to_kelvin, to_celsius, to_fahrenheit
 
 
 class TestToKelvin(object):
-    def test_to_kelvin_default_values_scalar(self):
+    def test_to_kelvin_default_values(self):
         kelvin = to_kelvin()
         assert torch.all(torch.eq(kelvin, _create_tensor(0)))
 
@@ -49,7 +50,7 @@ class TestToKelvin(object):
 
 class TestToCelsius(object):
 
-    def test_to_celsius_default_values_scalar(self):
+    def test_to_celsius_default_values(self):
         celsius = to_celsius()
         assert torch.all(torch.eq(celsius, _create_tensor(0)))
 
@@ -87,7 +88,7 @@ class TestToCelsius(object):
 
 class TestToFahrenheit(object):
 
-    def test_to_fahrenheit_default_values_scalar(self):
+    def test_to_fahrenheit_default_values(self):
         fahrenheit = to_fahrenheit()
         assert torch.all(torch.eq(fahrenheit, _create_tensor(0)))
 

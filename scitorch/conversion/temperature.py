@@ -1,10 +1,6 @@
 """Conversion of different temperature scales (Kelvin, Fahrenheit and Celsius)."""
 
-import torch
-from scitorch._globals import DEVICE as device
-
-def _create_tensor(val):
-    return torch.as_tensor(val, device=device, dtype=torch.float64)
+from scitorch.tools._tensors import _create_tensor
 
 def to_kelvin(val=0.0, scale='k'):
     """Converts a value from Celsius/Fahrenheit to Kelvin.
