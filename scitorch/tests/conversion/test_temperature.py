@@ -23,6 +23,14 @@ class TestToKelvin(object):
         kelvin = to_kelvin(kelvin_tensor)
         assert torch.all(torch.eq(kelvin, _create_tensor([0,0])))
 
+    def test_to_kelvin_wrong_scale_scalar(self):
+        with raises(NotImplementedError):
+            to_kelvin(0, 'l')
+
+    def test_to_kelvin_wrong_scale_list(self):
+        with raises(NotImplementedError):
+            to_kelvin([0, 0], 'l')
+
     def test_to_kelvin_from_kelvin_scalar(self):
         kelvin = to_kelvin(0, 'k')
         assert torch.all(torch.eq(kelvin, _create_tensor(0)))

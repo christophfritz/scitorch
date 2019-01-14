@@ -27,10 +27,12 @@ def to_kelvin(val=0.0, scale='k'):
     temp = _create_tensor(val)
     if scale == 'k':
         temp = temp
-    if scale == 'c':
+    elif scale == 'c':
         temp = temp + 273.15
-    if scale == 'f':
+    elif scale == 'f':
         temp = (temp - 32) * 5/9 + 273.15
+    else:
+        raise NotImplementedError(f'{scale} is not supported. See documentation for available scales.')
 
     return temp
 
