@@ -1,6 +1,8 @@
 """Collection of mathematical and physical constants and conversion factors."""
 
 # SI prefixes
+"""Source: http://www.npl.co.uk/si-units/"""
+
 yotta = 1e24
 zetta = 1e21
 exa = 1e18
