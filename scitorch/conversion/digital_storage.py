@@ -65,16 +65,45 @@ def to_bytes(val=0.0, unit='B'):
         elif unit == 'Pbit':
             ds = ds * 125 * constants.tera
         elif unit == 'Kib':
-            ds = ds * constants.kibi
+            ds = ds * constants.kibi / 8
         elif unit == 'Mib':
-            ds = ds * constants.mebi
+            ds = ds * constants.mebi / 8
         elif unit == 'Gib':
-            ds = ds * constants.gibi
+            ds = ds * constants.gibi / 8
         elif unit == 'Tib':
-            ds = ds * constants.tebi
+            ds = ds * constants.tebi / 8
         elif unit == 'Pib':
-            ds = ds * constants.pebi
+            ds = ds * constants.pebi / 8
         else:
             raise NotImplementedError(f'{unit} is not supported. See documentation for available units.')
+
+    return ds
+
+def to_kilobytes(val=0.0, unit='KB'):
+    """Converts a value from any byte or bit format to bytes.
+
+     Parameters:
+        -----------
+
+        val -- (int) value
+        scale -- (char) new unit
+
+        Returns:
+        --------
+
+        temp -- (Tensor) value in Kelvin scale
+
+        Example:
+        --------
+
+
+        """
+
+    # ds := digital storage
+    if unit == 'KB':
+        ds = _create_tensor(val)
+    else:
+        ds = to_bytes(val, unit)
+        ds = ds / constants.kilo
 
     return ds
