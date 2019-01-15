@@ -192,3 +192,38 @@ def to_gigabytes(val=0.0, unit='GB'):
         ds = ds / constants.giga
 
     return ds
+
+def to_terabytes(val=0.0, unit='TB'):
+    """Converts a value from any byte or bit format to bytes.
+
+     Parameters:
+        -----------
+
+        val -- (int) value
+        scale -- (char) new unit
+
+        Returns:
+        --------
+
+        temp -- (Tensor) value in Kelvin scale
+
+        Example:
+        --------
+
+        >>> terabyte = 2
+        >>> digital.to_gigabytes(terabyte, 'TB')
+        tensor(2000., dtype=torch.float64)
+        >>> tebibyte = 2
+        >>> digital.to_gigabytes(tebibyte, 'TiB')
+        tensor(2199.0233, dtype=torch.float64)
+
+        """
+
+    # ds := digital storage
+    if unit == 'TB':
+        ds = _create_tensor(val)
+    else:
+        ds = to_bytes(val, unit)
+        ds = ds / constants.tera
+
+    return ds
