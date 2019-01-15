@@ -1,7 +1,7 @@
 import torch
 from pytest import raises
 from scitorch.tools._tensors import _create_tensor
-from scitorch.conversion.digital_storage import to_kilobytes
+from scitorch.conversion.digital import to_kilobytes
 from scitorch.constants import constants
 
 

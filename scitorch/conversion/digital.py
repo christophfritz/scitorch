@@ -21,6 +21,13 @@ def to_bytes(val=0.0, unit='B'):
         Example:
         --------
 
+        >>> megabytes = 200
+        >>> digital.to_bytes(megabytes, 'MB')
+        tensor(2.0000e+08, dtype=torch.float64)
+
+        >>> kibibits = 1024
+        >>> digital.to_bytes(kibibits, 'Kib')
+        tensor(131072., dtype=torch.float64)
 
         """
 
@@ -96,6 +103,13 @@ def to_kilobytes(val=0.0, unit='KB'):
         Example:
         --------
 
+        >>> bytes = 500
+        >>> digital.to_kilobytes(bytes, 'B')
+        tensor(0.5000, dtype=torch.float64)
+
+        >>> mebibits = 1024
+        >>> digital.to_kilobytes(mebibits, 'Mib')
+        tensor(134217.7280, dtype=torch.float64)
 
         """
 
@@ -105,5 +119,41 @@ def to_kilobytes(val=0.0, unit='KB'):
     else:
         ds = to_bytes(val, unit)
         ds = ds / constants.kilo
+
+    return ds
+
+
+def to_megabytes(val=0.0, unit='MB'):
+    """Converts a value from any byte or bit format to bytes.
+
+     Parameters:
+        -----------
+
+        val -- (int) value
+        scale -- (char) new unit
+
+        Returns:
+        --------
+
+        temp -- (Tensor) value in Kelvin scale
+
+        Example:
+        --------
+
+        >>> bytes = 500
+        >>> digital.to_megabytes(bytes, 'B')
+        tensor(0.0005, dtype=torch.float64)
+        >>> bits = 256
+        >>> digital.to_megabytes(bits, 'b')
+        tensor(3.2000e-05, dtype=torch.float64)
+
+        """
+
+    # ds := digital storage
+    if unit == 'MB':
+        ds = _create_tensor(val)
+    else:
+        ds = to_bytes(val, unit)
+        ds = ds / constants.mega
 
     return ds
