@@ -375,3 +375,66 @@ class TestToMebibyte(object):
         mebibytes = to_mebibytes([0, 1], 'B')
         assert torch.all(torch.eq(mebibytes, _create_tensor([0, 1 / constants.mebi])))
 
+class TestToGibibyte(object):
+    def test_to_gibibytes_default_values_scalar(self):
+        gibibytes = to_gibibytes()
+        assert torch.all(torch.eq(gibibytes, _create_tensor(0)))
+
+    def test_to_gibibytes_from_gibibytes_scalar(self):
+        gibibytes = to_gibibytes(1, 'GiB')
+        assert torch.all(torch.eq(gibibytes, _create_tensor(1)))
+
+    def test_to_gibibytes_from_gibibytes_list(self):
+        gibibytes = to_gibibytes([0, 1], 'GiB')
+        assert torch.all(torch.eq(gibibytes, _create_tensor([0, 1])))
+
+    def test_to_gibibytes_from_byte_scalar(self):
+        gibibytes = to_gibibytes(1, 'B')
+        assert torch.all(torch.eq(gibibytes, _create_tensor(1 / constants.gibi)))
+
+    def test_to_gibibytes_from_byte_list(self):
+        gibibytes = to_gibibytes([0, 1], 'B')
+        assert torch.all(torch.eq(gibibytes, _create_tensor([0, 1 / constants.gibi])))
+        
+    
+class TestToTebibyte(object):
+    def test_to_tebibytes_default_values_scalar(self):
+        tebibytes = to_tebibytes()
+        assert torch.all(torch.eq(tebibytes, _create_tensor(0)))
+
+    def test_to_tebibytes_from_tebibytes_scalar(self):
+        tebibytes = to_tebibytes(1, 'TiB')
+        assert torch.all(torch.eq(tebibytes, _create_tensor(1)))
+
+    def test_to_tebibytes_from_tebibytes_list(self):
+        tebibytes = to_tebibytes([0, 1], 'TiB')
+        assert torch.all(torch.eq(tebibytes, _create_tensor([0, 1])))
+
+    def test_to_tebibytes_from_byte_scalar(self):
+        tebibytes = to_tebibytes(1, 'B')
+        assert torch.all(torch.eq(tebibytes, _create_tensor(1 / constants.tebi)))
+
+    def test_to_tebibytes_from_byte_list(self):
+        tebibytes = to_tebibytes([0, 1], 'B')
+        assert torch.all(torch.eq(tebibytes, _create_tensor([0, 1 / constants.tebi])))
+        
+class TestToPebibyte(object):
+    def test_to_pebibytes_default_values_scalar(self):
+        pebibytes = to_pebibytes()
+        assert torch.all(torch.eq(pebibytes, _create_tensor(0)))
+
+    def test_to_pebibytes_from_pebibytes_scalar(self):
+        pebibytes = to_pebibytes(1, 'PiB')
+        assert torch.all(torch.eq(pebibytes, _create_tensor(1)))
+
+    def test_to_pebibytes_from_pebibytes_list(self):
+        pebibytes = to_pebibytes([0, 1], 'PiB')
+        assert torch.all(torch.eq(pebibytes, _create_tensor([0, 1])))
+
+    def test_to_pebibytes_from_byte_scalar(self):
+        pebibytes = to_pebibytes(1, 'B')
+        assert torch.all(torch.eq(pebibytes, _create_tensor(1 / constants.pebi)))
+
+    def test_to_pebibytes_from_byte_list(self):
+        pebibytes = to_pebibytes([0, 1], 'B')
+        assert torch.all(torch.eq(pebibytes, _create_tensor([0, 1 / constants.pebi])))
