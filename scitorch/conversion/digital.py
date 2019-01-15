@@ -350,12 +350,12 @@ def to_gibibytes(val=0.0, unit='GiB'):
         Example:
         --------
 
-        >>> kilobytes = 1024
-        >>> digital.to_mebibytes(kilobytes, 'KB')
-        tensor(0.9766, dtype=torch.float64)
-        >>> tebibits = 1
-        >>> digital.to_mebibytes(tebibits, 'Tib')
-        tensor(131072., dtype=torch.float64)
+        >>> terabytes = 2
+        >>> digital.to_gibibytes(terabytes, 'TB')
+        tensor(1862.6451, dtype=torch.float64)
+        >>> mebibit = 234
+        >>> digital.to_gibibytes(mebibit, 'Mib')
+        tensor(0.0286, dtype=torch.float64)
 
         """
 
@@ -385,12 +385,12 @@ def to_tebibytes(val=0.0, unit='TiB'):
         Example:
         --------
 
-        >>> kilobytes = 1024
-        >>> digital.to_mebibytes(kilobytes, 'KB')
-        tensor(0.9766, dtype=torch.float64)
-        >>> tebibits = 1
-        >>> digital.to_mebibytes(tebibits, 'Tib')
-        tensor(131072., dtype=torch.float64)
+        >>> bytes = 9
+        >>> digital.to_tebibytes(bytes, 'B')
+        tensor(8.1855e-12, dtype=torch.float64)
+        >>> megabit = 300
+        >>> digital.to_tebibytes(megabit, 'Mbit')
+        tensor(3.4106e-05, dtype=torch.float64)
 
         """
 
@@ -420,12 +420,12 @@ def to_pebibytes(val=0.0, unit='PiB'):
         Example:
         --------
 
-        >>> kilobytes = 1024
-        >>> digital.to_mebibytes(kilobytes, 'KB')
-        tensor(0.9766, dtype=torch.float64)
-        >>> tebibits = 1
-        >>> digital.to_mebibytes(tebibits, 'Tib')
-        tensor(131072., dtype=torch.float64)
+        >>> petabytes = 4
+        >>> digital.to_pebibytes(petabytes, 'PB')
+        tensor(3.5527, dtype=torch.float64)
+        >>> bits = 1024
+        >>> digital.to_pebibytes(bits, 'b')
+        tensor(1.1369e-13, dtype=torch.float64)
 
         """
 
@@ -435,5 +435,391 @@ def to_pebibytes(val=0.0, unit='PiB'):
     else:
         ds = to_bytes(val, unit)
         ds = ds / constants.pebi
+
+    return ds
+
+def to_bits(val=0.0, unit='PiB'):
+    """Converts a value from any byte or bit format to bits.
+
+     Parameters:
+        -----------
+
+        val -- (int) value
+        scale -- (char) new unit
+
+        Returns:
+        --------
+
+        temp -- (Tensor) value in Kelvin scale
+
+        Example:
+        --------
+
+        >>> bytes = 4
+        >>> digital.to_bits(bytes, 'B')
+        tensor(32., dtype=torch.float64)
+        >>> kilobits = 32
+        >>> digital.to_bits(kilobits, 'Kbit')
+        tensor(32000., dtype=torch.float64)
+
+        """
+
+    # ds := digital storage
+    if unit == 'b':
+        ds = _create_tensor(val)
+    else:
+        ds = to_bytes(val, unit)
+        ds = ds * 8
+
+    return ds
+
+def to_kilobits(val=0.0, unit='Kbit'):
+    """Converts a value from any byte or bit format to kilobits.
+
+     Parameters:
+        -----------
+
+        val -- (int) value
+        scale -- (char) new unit
+
+        Returns:
+        --------
+
+        temp -- (Tensor) value in Kelvin scale
+
+        Example:
+        --------
+
+        >>> gigabytes = 500
+        >>> digital.to_kilobits(gigabytes, 'GB')
+        tensor(4.0000e+09, dtype=torch.float64)
+        >>> mebibits = 32
+        >>> digital.to_kilobits(mebibits, 'Mib')
+        tensor(33554.4320, dtype=torch.float64)
+
+        """
+
+    # ds := digital storage
+    if unit == 'Kbit':
+        ds = _create_tensor(val)
+    else:
+        ds = to_bytes(val, unit)
+        ds = ds * 8 * constants.milli
+
+    return ds
+
+def to_megabits(val=0.0, unit='Mbit'):
+    """Converts a value from any byte or bit format to megabits.
+
+     Parameters:
+        -----------
+
+        val -- (int) value
+        scale -- (char) new unit
+
+        Returns:
+        --------
+
+        temp -- (Tensor) value in Kelvin scale
+
+        Example:
+        --------
+
+        >>> petabytes = 4
+        >>> digital.to_megabits(petabytes, 'PB')
+        tensor(3.2000e+10, dtype=torch.float64)
+        >>> bits = 1024
+        >>> digital.to_megabits(bits, 'b')
+        tensor(0.0010, dtype=torch.float64)
+
+        """
+
+    # ds := digital storage
+    if unit == 'Mbit':
+        ds = _create_tensor(val)
+    else:
+        ds = to_bytes(val, unit)
+        ds = ds * 8 * constants.micro
+
+    return ds
+
+def to_gigabits(val=0.0, unit='Gbit'):
+    """Converts a value from any byte or bit format to gigabits.
+
+     Parameters:
+        -----------
+
+        val -- (int) value
+        scale -- (char) new unit
+
+        Returns:
+        --------
+
+        temp -- (Tensor) value in Kelvin scale
+
+        Example:
+        --------
+
+        >>> kilobytes = 400
+        >>> digital.to_gigabits(kilobytes, 'KB')
+        tensor(0.0032, dtype=torch.float64)
+        >>> pebibit = 400
+        >>> digital.to_gigabits(pebibit, 'Pib')
+        tensor(4.5036e+08, dtype=torch.float64)
+
+        """
+
+    # ds := digital storage
+    if unit == 'Gbit':
+        ds = _create_tensor(val)
+    else:
+        ds = to_bytes(val, unit)
+        ds = ds * 8 * constants.nano
+
+    return ds
+
+def to_terabits(val=0.0, unit='Tbit'):
+    """Converts a value from any byte or bit format to terabits.
+
+     Parameters:
+        -----------
+
+        val -- (int) value
+        scale -- (char) new unit
+
+        Returns:
+        --------
+
+        temp -- (Tensor) value in Kelvin scale
+
+        Example:
+        --------
+
+        >>> bytes = 6900
+        >>> digital.to_terabits(bytes, 'B')
+        tensor(5.5200e-08, dtype=torch.float64)
+        >>> terabits = 45
+        >>> digital.to_terabits(terabits, 'Tbit')
+        tensor(45., dtype=torch.float64)
+
+        """
+
+    # ds := digital storage
+    if unit == 'Tbit':
+        ds = _create_tensor(val)
+    else:
+        ds = to_bytes(val, unit)
+        ds = ds * 8 * constants.pico
+
+    return ds
+
+def to_petabits(val=0.0, unit='Pbit'):
+    """Converts a value from any byte or bit format to petabits.
+
+     Parameters:
+        -----------
+
+        val -- (int) value
+        scale -- (char) new unit
+
+        Returns:
+        --------
+
+        temp -- (Tensor) value in Kelvin scale
+
+        Example:
+        --------
+
+        >>> mebibytes = 465
+        >>> digital.to_petabits(mebibytes, 'MiB')
+        tensor(3.9007e-06, dtype=torch.float64)
+        >>> tebibits = 34
+        >>> digital.to_petabits(tebibits, 'Tib')
+        tensor(0.0374, dtype=torch.float64)
+
+
+        """
+
+    # ds := digital storage
+    if unit == 'Pbit':
+        ds = _create_tensor(val)
+    else:
+        ds = to_bytes(val, unit)
+        ds = ds * 8 * constants.femto
+
+    return ds
+
+def to_kibibits(val=0.0, unit='Kib'):
+    """Converts a value from any byte or bit format to kibibits.
+
+     Parameters:
+        -----------
+
+        val -- (int) value
+        scale -- (char) new unit
+
+        Returns:
+        --------
+
+        temp -- (Tensor) value in Kelvin scale
+
+        Example:
+        --------
+
+        >>> gibibyte = 23
+        >>> digital.to_kibibits(gibibyte, 'GiB')
+        tensor(1.9294e+08, dtype=torch.float64)
+        >>> gigabit = 56
+        >>> digital.to_kibibits(gigabit, 'Gbit')
+        tensor(54687500., dtype=torch.float64)
+
+        """
+
+    # ds := digital storage
+    if unit == 'Kib':
+        ds = _create_tensor(val)
+    else:
+        ds = to_bytes(val, unit)
+        ds = ds / (constants.kibi / 8)
+
+    return ds
+
+def to_mebibits(val=0.0, unit='Mib'):
+    """Converts a value from any byte or bit format to mebibits.
+
+     Parameters:
+        -----------
+
+        val -- (int) value
+        scale -- (char) new unit
+
+        Returns:
+        --------
+
+        temp -- (Tensor) value in Kelvin scale
+
+        Example:
+        --------
+
+        >>> tebibyte = 5
+        >>> digital.to_mebibits(tebibyte, 'TiB')
+        tensor(41943040., dtype=torch.float64)
+        >>> bit = 45
+        >>> digital.to_mebibits(bit, 'b')
+        tensor(4.2915e-05, dtype=torch.float64)
+
+        """
+
+    # ds := digital storage
+    if unit == 'Mib':
+        ds = _create_tensor(val)
+    else:
+        ds = to_bytes(val, unit)
+        ds = ds / (constants.mebi / 8)
+
+    return ds
+
+def to_gibibits(val=0.0, unit='Gib'):
+    """Converts a value from any byte or bit format to gibibits.
+
+     Parameters:
+        -----------
+
+        val -- (int) value
+        scale -- (char) new unit
+
+        Returns:
+        --------
+
+        temp -- (Tensor) value in Kelvin scale
+
+        Example:
+        --------
+
+        >>> kilobyte = 45
+        >>> digital.to_gibibits(kilobyte, 'KB')
+        tensor(0.0003, dtype=torch.float64)
+        >>> mebibit = 235
+        >>> digital.to_gibibits(mebibit, 'Mib')
+        tensor(0.2295, dtype=torch.float64)
+
+        """
+
+    # ds := digital storage
+    if unit == 'Gib':
+        ds = _create_tensor(val)
+    else:
+        ds = to_bytes(val, unit)
+        ds = ds / (constants.gibi / 8)
+
+    return ds
+
+def to_tebibits(val=0.0, unit='Tib'):
+    """Converts a value from any byte or bit format to tebibits.
+
+     Parameters:
+        -----------
+
+        val -- (int) value
+        scale -- (char) new unit
+
+        Returns:
+        --------
+
+        temp -- (Tensor) value in Kelvin scale
+
+        Example:
+        --------
+
+        >>> byte = 5
+        >>> digital.to_tebibits(byte, 'B')
+        tensor(3.6380e-11, dtype=torch.float64)
+        >>> bit = 23
+        >>> digital.to_tebibits(bit, 'b')
+        tensor(2.0918e-11, dtype=torch.float64)
+
+        """
+
+    # ds := digital storage
+    if unit == 'Tib':
+        ds = _create_tensor(val)
+    else:
+        ds = to_bytes(val, unit)
+        ds = ds / (constants.tebi / 8)
+
+    return ds
+
+def to_pebibits(val=0.0, unit='Pib'):
+    """Converts a value from any byte or bit format to pebibits.
+
+     Parameters:
+        -----------
+
+        val -- (int) value
+        scale -- (char) new unit
+
+        Returns:
+        --------
+
+        temp -- (Tensor) value in Kelvin scale
+
+        Example:
+        --------
+
+        >>> petabyte = 15
+        >>> digital.to_pebibits(petabyte, 'PB')
+        tensor(106.5814, dtype=torch.float64)
+        >>> megabit = 1
+        >>> digital.to_pebibits(megabit, 'Mbit')
+        tensor(8.8818e-10, dtype=torch.float64)
+
+        """
+
+    # ds := digital storage
+    if unit == 'Pib':
+        ds = _create_tensor(val)
+    else:
+        ds = to_bytes(val, unit)
+        ds = ds / (constants.pebi / 8)
 
     return ds
