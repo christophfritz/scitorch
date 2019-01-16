@@ -31,5 +31,6 @@ setup(name='scitorch',
           'torch',
           'torchvision',
           'pytest',
+          'virtualenvwrapper',
       ],
       zip_safe=False)
