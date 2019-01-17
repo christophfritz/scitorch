@@ -3,6 +3,7 @@
 import torch
 import argparse
 import os
+import scitorch
 import re
 
 parser = argparse.ArgumentParser(description='Information about GPU systems.')
@@ -13,38 +14,17 @@ parser.add_argument('--test', help='set device to CPU or GPU and run tests')
 
 args = vars(parser.parse_args())
 
-pip_install = 'pip install scitorch'
-
-def setup_virtualenv():
-    with open(os.path.join(os.path.expanduser('~'), '.bashrc')) as fp:
-        if 'virtualenvwrapper.sh' in fp.read():
-            print('Virtualenv already set up.')
-            os.system('mktmpenv')
-        else:
-            print('Set up virtualenv.')
-            os.system('echo "export WORKON_HOME=~/.virtualenvs" >> ~/.bashrc')
-
-            python = os.popen('which python').read()
-            wrapper = re.sub('python', 'virtualenvwrapper.sh', python)
-            wrapper = re.sub('\n', '', wrapper)
-
-            os.system(f'echo ". {wrapper}" >> ~/.bashrc')
-            os.system('. ~/.bashrc')
-            os.system('mktmpenv')
-
 
 def run_tests(device):
     if device == 'cpu':
         os.system('scitorch --cpu 0')
-        setup_virtualenv()
-        # TODO: Change to actual scitorch package
-        os.system(pip_install)
-        os.system('pytest')
     elif device == 'gpu':
         os.system('scitorch --gpu 0')
-        setup_virtualenv()
-        os.system(pip_install)
-        os.system('pytest')
+
+    path = scitorch.__file__
+    path = re.sub('scripts/scitorch.py', 'tests', path)
+    os.system(f'pytest {path}')
+
 
 
 gpu_available = torch.cuda.is_available()
@@ -81,8 +61,8 @@ elif args['test'] is not None:
     if args['test'] == 'cpu':
         print(f'Run tests on the CPU.')
         run_tests('cpu')
+        exit(0)
     elif args['test'] == 'gpu':
         print(f'Run tests on the GPU.')
         run_tests('gpu')
-
 
