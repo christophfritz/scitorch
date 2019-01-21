@@ -1,6 +1,4 @@
-import sys
-
-from setuptools import setup
+from setuptools import setup, find_packages
 
 def readme():
     with open('README.md') as f:
@@ -13,6 +11,7 @@ setup(name='scitorch',
       classifiers=[
           'Development Status :: 2 - Pre-Alpha',
           'License :: OSI Approved :: Apache Software License',
+          'Programming Language :: Python :: 3.6',
           'Programming Language :: Python :: 3.7',
           'Topic :: Scientific/Engineering :: Physics',
           'Topic :: Scientific/Engineering :: Mathematics',
@@ -21,9 +20,7 @@ setup(name='scitorch',
       author='Christoph Fritz',
       author_email='christophfritz95@icloud.com',
       license='Apache License 2.0',
-      packages=[
-          'scitorch'
-      ],
+      packages=find_packages(),
       setup_require=[
           'pytest-runner'
       ],
@@ -34,5 +31,8 @@ setup(name='scitorch',
           'torch',
           'torchvision',
           'pytest',
+      ],
+      scripts=[
+          'scitorch/scripts/scitorch'
       ],
       zip_safe=False)

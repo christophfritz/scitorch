@@ -7,5 +7,7 @@ python:
 install:
         - pip install .
 script:
+        - scitorch --cpu
+        - scitorch --test
         - pytest
 

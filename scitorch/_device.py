@@ -1,3 +1,3 @@
-import torch
+import torch 
 
 DEVICE = torch.device('cpu')
