@@ -32,4 +32,7 @@ setup(name='scitorch',
           'torchvision',
           'pytest',
       ],
+      scripts=[
+          'scitorch/scripts/scitorch'
+      ],
       zip_safe=False)
