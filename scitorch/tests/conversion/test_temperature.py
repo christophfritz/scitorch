@@ -31,11 +31,6 @@ class TestToKelvin(object):
         with raises(NotImplementedError):
             to_kelvin([0, 0], 'l')
 
-    def test_to_kelvin_with_dimension(self):
-        kelvin = to_kelvin([0, -273.15], 'c', dim=True)
-        assert isinstance(kelvin, dict)
-        assert torch.all(torch.eq(kelvin['val'], _create_tensor([273.15, 0]))) and kelvin['dim'] == 'K'
-
     def test_to_kelvin_from_kelvin_scalar(self):
         kelvin = to_kelvin(0, 'k')
         assert torch.all(torch.eq(kelvin, _create_tensor(0)))
@@ -75,11 +70,6 @@ class TestToCelsius(object):
         with raises(TypeError):
             to_celsius('k', [0, 0])
 
-    def test_to_celsius_with_dimension(self):
-        celsius = to_celsius([32, 5], 'f', dim=True)
-        assert isinstance(celsius, dict)
-        assert torch.all(torch.eq(celsius['val'], _create_tensor([0, -15]))) and celsius['dim'] == 'C'
-
     def test_to_celsius_from_celsius_scalar(self):
         celsius = to_celsius(0, 'c')
         assert torch.all(torch.eq(celsius, _create_tensor(0)))
@@ -117,11 +107,6 @@ class TestToFahrenheit(object):
     def test_to_fahrenheit_wrong_arguments_list(self):
         with raises(TypeError):
             to_fahrenheit('c', [0, 0])
-
-    def test_to_fahrenheit_with_dimension(self):
-        fahrenheit = to_fahrenheit([273.15, 258.15], 'k', dim=True)
-        assert isinstance(fahrenheit, dict)
-        assert torch.all(torch.eq(fahrenheit['val'], _create_tensor([32, 5]))) and fahrenheit['dim'] == 'F'
 
     def test_to_fahrenheit_from_fahrenheit_scalar(self):
         fahrenheit = to_fahrenheit(32, 'f')
