@@ -33,3 +33,7 @@ pebi = 2**50
 exbi = 2**60
 zebi = 2**70
 yobi = 2**80
+
+# physical constants
+
+eV = dict(val=1.6021766208 * 1e-19, dim='J')
