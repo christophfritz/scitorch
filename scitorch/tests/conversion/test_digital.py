@@ -32,11 +32,11 @@ class TestToBytes(object):
         bytes = to_bytes(byte_tensor)
         assert torch.all(torch.eq(bytes, T([0, 1])))
 
-    def test_to_bytes_wrong_scale_scalar(self):
+    def test_to_bytes_wrong_unit_scalar(self):
         with raises(NotImplementedError):
             to_bytes(1, 'kb')
 
-    def test_to_bytes_wrong_scale_list(self):
+    def test_to_bytes_wrong_unit_list(self):
         with raises(NotImplementedError):
             to_bytes([0, 1], 'kb')
 

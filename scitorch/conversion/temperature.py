@@ -23,7 +23,6 @@ def to_kelvin(val=0.0, scale='k', dim=False):
     Example:
     --------
 
-    >>> from scitorch.conversion import temperature
     >>> fahrenheit = 32
     >>> temperature.to_kelvin(fahrenheit, 'f')
     tensor(273.1500, dtype=torch.float64)

@@ -24,15 +24,14 @@ def to_joule(val=0.0, unit='J', dim=False):
     Example:
     --------
 
-    >>> from scitorch.conversion import temperature
-    >>> fahrenheit = 32
-    >>> temperature.to_kelvin(fahrenheit, 'f')
-    tensor(273.1500, dtype=torch.float64)
-    >>> fahrenheit = [32, 5]
-    >>> temperature.to_kelvin(fahrenheit, 'f')
-    tensor([273.1500, 258.1500], dtype=torch.float64)
-    >>> temperature.to_kelvin(fahrenheit, 'f', dim=True)
-    {'val': tensor([273.1500, 258.1500], dtype=torch.float64), 'dim': 'K'}
+    >>> watthours = 300
+    >>> energy.to_joule(watthours, 'Wh')
+    tensor(1080000., dtype=torch.float64)
+    >>> electronvolt = [1, 2]
+    >>> energy.to_joule(electronvolt, 'eV')
+    tensor([1.6022e-19, 3.2044e-19], dtype=torch.float64)
+    >>> energy.to_joule(electronvolt, 'eV', dim=True)
+    {'val': tensor([1.6022e-19, 3.2044e-19], dtype=torch.float64), 'dim': 'J'}
 
     """
 

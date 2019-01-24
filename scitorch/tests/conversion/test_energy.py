@@ -1,7 +1,6 @@
 import torch
 
 from pytest import raises
-from scitorch.tools._tensors import T
 from scitorch.conversion.energy import *
 
 
@@ -23,11 +22,11 @@ class TestToJoule(object):
         joule = to_joule(joule_tensor)
         assert torch.equal(joule, T([0, 0]))
 
-    def test_to_joule_wrong_scale_scalar(self):
+    def test_to_joule_wrong_unit_scalar(self):
         with raises(NotImplementedError):
             to_joule(0, 'Kcal')
 
-    def test_to_joule_wrong_scale_list(self):
+    def test_to_joule_wrong_unit_list(self):
         with raises(NotImplementedError):
             to_joule([0, 0], 'l')
 
