@@ -1,7 +1,6 @@
 import torch
 
 from pytest import raises
-from scitorch.constants import constants
 from scitorch.conversion.mass import *
 
 
@@ -12,11 +11,11 @@ class TestToKilogram(object):
 
     def test_to_kilogram_wrong_arguments_scalar(self):
         with raises(TypeError):
-            to_kilogram('Kg', 0)
+            to_kilogram('kg', 0)
 
     def test_to_kilogram_wrong_arguments_list(self):
         with raises(TypeError):
-            to_kilogram('Kg', [0, 0])
+            to_kilogram('kg', [0, 0])
 
     def test_to_kilogram_tensor(self):
         kilogram_tensor = T([0, 0])
@@ -34,14 +33,14 @@ class TestToKilogram(object):
     def test_to_kilogram_with_dimension(self):
         kilogram = to_kilogram([0, 1], 'g', dim=True)
         assert isinstance(kilogram, dict)
-        assert torch.equal(kilogram['val'], T([0, constants.milli])) and kilogram['dim'] == 'Kg'
+        assert torch.equal(kilogram['val'], T([0, constants.milli])) and kilogram['dim'] == 'kg'
 
     def test_to_kilogram_from_kilogram_scalar(self):
-        kilogram = to_kilogram(0, 'Kg')
+        kilogram = to_kilogram(0, 'kg')
         assert torch.equal(kilogram, T(0))
 
     def test_to_kilogram_from_kilogram_list(self):
-        kilogram = to_kilogram([0, 50], 'Kg')
+        kilogram = to_kilogram([0, 50], 'kg')
         assert torch.equal(kilogram, T([0, 50]))
 
     def test_to_kilogram_from_milligram_scalar(self):

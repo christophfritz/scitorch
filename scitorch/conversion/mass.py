@@ -1,9 +1,9 @@
-"""Conversion of different mass types (e.g. mg, Kg, tonne ..)."""
+"""Conversion of different mass types (e.g. mg, kg, tonne ..)."""
 
 from scitorch.tools._tensors import T
 from scitorch.constants import constants
 
-def to_kilogram(val=0.0, unit='Kg', dim=False):
+def to_kilogram(val=0.0, unit='kg', dim=False):
     """Converts a value from any mass unit to Kilogram.
 
     Parameters:
@@ -19,7 +19,7 @@ def to_kilogram(val=0.0, unit='Kg', dim=False):
 
     or
 
-    {'value' : temp, 'dim' : 'Kg'} -- (dict) dictionary of value and dimension
+    {'value' : temp, 'dim' : 'kg'} -- (dict) dictionary of value and dimension
 
     Example:
     --------
@@ -33,12 +33,12 @@ def to_kilogram(val=0.0, unit='Kg', dim=False):
     >>> mass.to_kilogram(tonne, 't')
     tensor(3000., dtype=torch.float64)
     >>> mass.to_kilogram(tonne, 't', dim=True)
-    {'val': tensor(3000., dtype=torch.float64), 'dim': 'Kg'}
+    {'val': tensor(3000., dtype=torch.float64), 'dim': 'kg'}
 
     """
 
     mass = T(val)
-    if unit == 'Kg':
+    if unit == 'kg':
         mass = mass
     elif unit == 'g':
         mass = mass / constants.kilo
@@ -52,4 +52,4 @@ def to_kilogram(val=0.0, unit='Kg', dim=False):
     if dim == False:
         return mass
     else:
-        return dict(val=mass, dim='Kg')
+        return dict(val=mass, dim='kg')

@@ -5,32 +5,36 @@ from scitorch.constants import constants
 
 
 def to_bytes(val=0.0, unit='B', dim=False):
-    """Converts a value from any byte or bit format to bytes.
+    """
+    Converts a value from any byte or bit format to bytes.
 
-     Parameters:
-        -----------
+    Parameters:
+    -----------
 
-        val -- (int) value
-        scale -- (char) new unit
+    val : float
+        Value(s) of units to be converted to Bytes.
 
-        Returns:
-        --------
+    unit : char
+        Specifies as a string the original unit from which the units will be converted to Bytes.
 
-        temp -- (Tensor) value in bytes
+    Returns:
+    --------
 
-        Example:
-        --------
+    temp -- (Tensor) value in bytes
 
-        >>> megabytes = 200
-        >>> digital.to_bytes(megabytes, 'MB')
-        tensor(2.0000e+08, dtype=torch.float64)
-        >>> kibibits = 1024
-        >>> digital.to_bytes(kibibits, 'Kib')
-        tensor(131072., dtype=torch.float64)
-        >>> digital.to_bytes(kibibits, 'Kib', dim=True)
-        {'val': tensor(131072., dtype=torch.float64), 'dim': 'B'}
+    Example:
+    --------
 
-        """
+    >>> megabytes = 200
+    >>> digital.to_bytes(megabytes, 'MB')
+    tensor(2.0000e+08, dtype=torch.float64)
+    >>> kibibits = 1024
+    >>> digital.to_bytes(kibibits, 'Kib')
+    tensor(131072., dtype=torch.float64)
+    >>> digital.to_bytes(kibibits, 'Kib', dim=True)
+    {'val': tensor(131072., dtype=torch.float64), 'dim': 'B'}
+
+    """
 
     # ds := digital storage
     ds = T(val)
