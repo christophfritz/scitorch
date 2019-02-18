@@ -1,8 +1,8 @@
 """Conversion of different temperature scales (Kelvin, Fahrenheit and Celsius)."""
 
-from scitorch.tools._tensors import _create_tensor
+from scitorch.tools._tensors import T
 
-def to_kelvin(val=0.0, scale='k'):
+def to_kelvin(val=0.0, scale='k', dim=False):
     """Converts a value from Celsius/Fahrenheit to Kelvin.
 
     Parameters:
@@ -16,27 +16,40 @@ def to_kelvin(val=0.0, scale='k'):
 
     temp -- (Tensor) value in Kelvin scale
 
+    or
+
+    {'value' : temp, 'dim' : 'K'} -- (dict) dictionary of value and dimension
+
     Example:
     --------
 
     >>> fahrenheit = 32
     >>> temperature.to_kelvin(fahrenheit, 'f')
     tensor(273.1500, dtype=torch.float64)
+    >>> fahrenheit = [32, 5]
+    >>> temperature.to_kelvin(fahrenheit, 'f')
+    tensor([273.1500, 258.1500], dtype=torch.float64)
+    >>> temperature.to_kelvin(fahrenheit, 'f', dim=True)
+    {'val': tensor([273.1500, 258.1500], dtype=torch.float64), 'dim': 'K'}
 
     """
-    temp = _create_tensor(val)
+
+    temp = T(val)
     if scale == 'k':
         temp = temp
     elif scale == 'c':
         temp = temp + 273.15
     elif scale == 'f':
-        temp = (temp - 32) * 5/9 + 273.15
+        temp = (temp - 32) * 5 / 9 + 273.15
     else:
         raise NotImplementedError(f'{scale} is not supported. See documentation for available scales.')
 
-    return temp
+    if dim == False:
+        return temp
+    else:
+        return dict(val=temp, dim='K')
 
-def to_celsius(val=0.0, scale='c'):
+def to_celsius(val=0.0, scale='c', dim=False):
     """Converts a value from Kelvin/Fahrenheit to Celsius.
 
     Parameters:
@@ -48,7 +61,11 @@ def to_celsius(val=0.0, scale='c'):
     Returns:
     --------
 
-    temp -- (Tensor) value in Kelvin scale
+    temp -- (Tensor) value in Celsius scale
+
+    or
+
+    {'value' : temp, 'dim' : 'C'} -- (dict) dictionary of value and dimension
 
     Example:
     --------
@@ -56,18 +73,26 @@ def to_celsius(val=0.0, scale='c'):
     >>> kelvin = 0
     >>> temperature.to_celsius(kelvin, 'k')
     tensor(-273.1500, dtype=torch.float64)
+    >>> kelvin = [0, 273.15]
+    >>> temperature.to_celsius(kelvin, 'k')
+    tensor([-273.1500,    0.0000], dtype=torch.float64)
+    >>> temperature.to_celsius(kelvin, 'k', dim=True)
+    {'val': tensor([-273.1500,    0.0000], dtype=torch.float64), 'dim': 'C'}
 
     """
 
     if scale =='c':
-        temp = _create_tensor(val)
+        temp = T(val)
     else:
         temp = to_kelvin(val, scale)
         temp = temp - 273.15
 
-    return temp
+    if dim == False:
+        return temp
+    else:
+        return dict(val=temp, dim='C')
 
-def to_fahrenheit(val=0.0, scale='f'):
+def to_fahrenheit(val=0.0, scale='f', dim=False):
     """Converts a value from Kelvin/Celsius to Fahrenheit.
 
     Parameters:
@@ -79,7 +104,11 @@ def to_fahrenheit(val=0.0, scale='f'):
     Returns:
     --------
 
-    temp -- (Tensor) value in Kelvin scale
+    temp -- (Tensor) value in Fahrenheit scale
+
+    or
+
+    {'value' : temp, 'dim' : 'F'} -- (dict) dictionary of value and dimension
 
     Example:
     --------
@@ -87,13 +116,21 @@ def to_fahrenheit(val=0.0, scale='f'):
     >>> celsius = 0
     >>> temperature.to_fahrenheit(celsius, 'c')
     tensor(32., dtype=torch.float64)
+    >>> celsius = [0, -15]
+    >>> temperature.to_fahrenheit(celsius, 'c')
+    tensor([32.,  5.], dtype=torch.float64)
+    >>> temperature.to_fahrenheit(celsius, 'c', dim=True)
+    {'val': tensor([32.,  5.], dtype=torch.float64), 'dim': 'F'}
 
     """
 
     if scale == 'f':
-        temp = _create_tensor(val)
+        temp = T(val)
     else:
         temp = to_kelvin(val, scale)
         temp = (temp - 273.15) * 9/5 + 32
 
-    return temp
+    if dim == False:
+        return temp
+    else:
+        return dict(val=temp, dim='F')

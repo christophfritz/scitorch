@@ -4,5 +4,5 @@ import torch
 
 from scitorch._device import DEVICE as device
 
-def _create_tensor(val):
+def T(val):
     return torch.as_tensor(val, device=device, dtype=torch.float64)
