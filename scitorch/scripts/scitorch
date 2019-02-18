@@ -1,0 +1,72 @@
+#!/usr/bin/env python
+
+import torch
+import argparse
+import os
+import scitorch
+import re
+
+parser = argparse.ArgumentParser(description='Information about GPU systems.')
+parser.add_argument('--cuda', help='checks system if GPU is available and prints out information if available.',
+                    action='store_true')
+parser.add_argument('--gpu', help='set GPU device number (int) - check --cuda',
+                    action='store_true')
+parser.add_argument('--cpu', help='set device to CPU with --cpu 0 (int)',
+                    action='store_true')
+parser.add_argument('--test', help='set device to CPU or GPU and run tests',
+                    action='store_true')
+
+args = parser.parse_args()
+
+_device_path = os.path.dirname(os.path.realpath(scitorch.__file__))
+
+_device = re.sub('site-packages/scitorch', 'site-packages/scitorch/_device.py', _device_path)
+
+
+def set_device(device):
+    with open(_device, 'w') as f:
+        f.write(f"import torch \n"
+                f"\n"
+                f"DEVICE = torch.device('{device}')")
+        f.close()
+
+
+def run_tests():
+    path = scitorch.__file__
+    path = re.sub('site-packages/scitorch/__init__.py', 'site-packages/scitorch/tests', path)
+    os.system(f'pytest {path}')
+
+
+gpu_available = torch.cuda.is_available()
+
+if gpu_available == False:
+    print(f'Check if GPU is available ....... {gpu_available}')
+    print(f'No GPU devices found on this machine. - Set device to CPU.')
+    set_device('cpu')
+elif args.cuda:
+    print(f'Check if GPU is available ....... {gpu_available}')
+    print(f'Number of devices available ....... {torch.cuda.device_count()}')
+    print(f'Current device ....... {torch.cuda.current_device()}')
+    print(f'Name of current device ....... {torch.cuda.get_device_name(torch.cuda.current_device())}')
+    exit(0)
+elif args.gpu:
+    set_device('cuda')
+    print(f"Device set to GPU.")
+    exit(0)
+
+if args.cpu:
+    set_device('cpu')
+    print('Device set to CPU.')
+    exit(0)
+
+if args.test:
+    if 'cpu' in open(_device).read():
+        print('Testing SciTorch library on CPU (Change to GPU with --gpu).')
+        run_tests()
+    elif 'cuda' in open(_device).read():
+        print('Testing SciTorch library on GPU (Change to CPU with --cpu).')
+        run_tests()
+    else:
+        print('No device set! Set device with --cpu or --gpu.')
+    exit(0)
+
