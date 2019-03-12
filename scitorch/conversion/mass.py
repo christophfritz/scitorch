@@ -1,6 +1,6 @@
 """Conversion of different mass types (e.g. mg, kg, tonne ..)."""
 
-from scitorch.tools._tensors import T
+from scitorch.tools._tensors import _create_tensor
 from scitorch.constants import constants
 
 def to_kilogram(val=0.0, unit='kg', dim=False):
@@ -37,7 +37,7 @@ def to_kilogram(val=0.0, unit='kg', dim=False):
 
     """
 
-    mass = T(val)
+    mass = _create_tensor(val)
     if unit == 'kg':
         mass = mass
     elif unit == 'g':

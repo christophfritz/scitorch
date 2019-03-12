@@ -1,6 +1,6 @@
 """Conversion of different digital storage types (Bytes, Bits)."""
 
-from scitorch.tools._tensors import T
+from scitorch.tools._tensors import _create_tensor
 from scitorch.constants import constants
 
 
@@ -37,7 +37,7 @@ def to_bytes(val=0.0, unit='B', dim=False):
     """
 
     # ds := digital storage
-    ds = T(val)
+    ds = _create_tensor(val)
     if 'b' not in unit:
         if unit == 'B':
             ds = ds
@@ -123,7 +123,7 @@ def to_bytes(val=0.0, unit='B', dim=False):
 #
 #     # ds := digital storage
 #     if unit == 'KB':
-#         ds = T(val)
+#         ds = _create_tensor(val)
 #     else:
 #         ds = to_bytes(val, unit)
 #         ds = ds / constants.kilo
@@ -159,7 +159,7 @@ def to_bytes(val=0.0, unit='B', dim=False):
 #
 #     # ds := digital storage
 #     if unit == 'MB':
-#         ds = T(val)
+#         ds = _create_tensor(val)
 #     else:
 #         ds = to_bytes(val, unit)
 #         ds = ds / constants.mega
@@ -194,7 +194,7 @@ def to_bytes(val=0.0, unit='B', dim=False):
 #
 #     # ds := digital storage
 #     if unit == 'GB':
-#         ds = T(val)
+#         ds = _create_tensor(val)
 #     else:
 #         ds = to_bytes(val, unit)
 #         ds = ds / constants.giga
@@ -229,7 +229,7 @@ def to_bytes(val=0.0, unit='B', dim=False):
 #
 #     # ds := digital storage
 #     if unit == 'TB':
-#         ds = T(val)
+#         ds = _create_tensor(val)
 #     else:
 #         ds = to_bytes(val, unit)
 #         ds = ds / constants.tera
@@ -264,7 +264,7 @@ def to_bytes(val=0.0, unit='B', dim=False):
 #
 #     # ds := digital storage
 #     if unit == 'PB':
-#         ds = T(val)
+#         ds = _create_tensor(val)
 #     else:
 #         ds = to_bytes(val, unit)
 #         ds = ds / constants.peta
@@ -299,7 +299,7 @@ def to_bytes(val=0.0, unit='B', dim=False):
 #
 #     # ds := digital storage
 #     if unit == 'KiB':
-#         ds = T(val)
+#         ds = _create_tensor(val)
 #     else:
 #         ds = to_bytes(val, unit)
 #         ds = ds / constants.kibi
@@ -334,7 +334,7 @@ def to_bytes(val=0.0, unit='B', dim=False):
 #
 #     # ds := digital storage
 #     if unit == 'MiB':
-#         ds = T(val)
+#         ds = _create_tensor(val)
 #     else:
 #         ds = to_bytes(val, unit)
 #         ds = ds / constants.mebi
@@ -369,7 +369,7 @@ def to_bytes(val=0.0, unit='B', dim=False):
 #
 #     # ds := digital storage
 #     if unit == 'GiB':
-#         ds = T(val)
+#         ds = _create_tensor(val)
 #     else:
 #         ds = to_bytes(val, unit)
 #         ds = ds / constants.gibi
@@ -404,7 +404,7 @@ def to_bytes(val=0.0, unit='B', dim=False):
 #
 #     # ds := digital storage
 #     if unit == 'TiB':
-#         ds = T(val)
+#         ds = _create_tensor(val)
 #     else:
 #         ds = to_bytes(val, unit)
 #         ds = ds / constants.tebi
@@ -439,7 +439,7 @@ def to_bytes(val=0.0, unit='B', dim=False):
 #
 #     # ds := digital storage
 #     if unit == 'PiB':
-#         ds = T(val)
+#         ds = _create_tensor(val)
 #     else:
 #         ds = to_bytes(val, unit)
 #         ds = ds / constants.pebi
@@ -477,7 +477,7 @@ def to_bits(val=0.0, unit='b', dim=False):
     # ds := digital storage
 
     if unit == 'b':
-        ds = T(val)
+        ds = _create_tensor(val)
     else:
         ds = to_bytes(val, unit)
         ds = ds * 8
@@ -515,7 +515,7 @@ def to_bits(val=0.0, unit='b', dim=False):
 #
 #     # ds := digital storage
 #     if unit == 'Kbit':
-#         ds = T(val)
+#         ds = _create_tensor(val)
 #     else:
 #         ds = to_bytes(val, unit)
 #         ds = ds * 8 * constants.milli
@@ -550,7 +550,7 @@ def to_bits(val=0.0, unit='b', dim=False):
 #
 #     # ds := digital storage
 #     if unit == 'Mbit':
-#         ds = T(val)
+#         ds = _create_tensor(val)
 #     else:
 #         ds = to_bytes(val, unit)
 #         ds = ds * 8 * constants.micro
@@ -585,7 +585,7 @@ def to_bits(val=0.0, unit='b', dim=False):
 #
 #     # ds := digital storage
 #     if unit == 'Gbit':
-#         ds = T(val)
+#         ds = _create_tensor(val)
 #     else:
 #         ds = to_bytes(val, unit)
 #         ds = ds * 8 * constants.nano
@@ -620,7 +620,7 @@ def to_bits(val=0.0, unit='b', dim=False):
 #
 #     # ds := digital storage
 #     if unit == 'Tbit':
-#         ds = T(val)
+#         ds = _create_tensor(val)
 #     else:
 #         ds = to_bytes(val, unit)
 #         ds = ds * 8 * constants.pico
@@ -656,7 +656,7 @@ def to_bits(val=0.0, unit='b', dim=False):
 #
 #     # ds := digital storage
 #     if unit == 'Pbit':
-#         ds = T(val)
+#         ds = _create_tensor(val)
 #     else:
 #         ds = to_bytes(val, unit)
 #         ds = ds * 8 * constants.femto
@@ -691,7 +691,7 @@ def to_bits(val=0.0, unit='b', dim=False):
 #
 #     # ds := digital storage
 #     if unit == 'Kib':
-#         ds = T(val)
+#         ds = _create_tensor(val)
 #     else:
 #         ds = to_bytes(val, unit)
 #         ds = ds / (constants.kibi / 8)
@@ -726,7 +726,7 @@ def to_bits(val=0.0, unit='b', dim=False):
 #
 #     # ds := digital storage
 #     if unit == 'Mib':
-#         ds = T(val)
+#         ds = _create_tensor(val)
 #     else:
 #         ds = to_bytes(val, unit)
 #         ds = ds / (constants.mebi / 8)
@@ -761,7 +761,7 @@ def to_bits(val=0.0, unit='b', dim=False):
 #
 #     # ds := digital storage
 #     if unit == 'Gib':
-#         ds = T(val)
+#         ds = _create_tensor(val)
 #     else:
 #         ds = to_bytes(val, unit)
 #         ds = ds / (constants.gibi / 8)
@@ -796,7 +796,7 @@ def to_bits(val=0.0, unit='b', dim=False):
 #
 #     # ds := digital storage
 #     if unit == 'Tib':
-#         ds = T(val)
+#         ds = _create_tensor(val)
 #     else:
 #         ds = to_bytes(val, unit)
 #         ds = ds / (constants.tebi / 8)
@@ -831,7 +831,7 @@ def to_bits(val=0.0, unit='b', dim=False):
 #
 #     # ds := digital storage
 #     if unit == 'Pib':
-#         ds = T(val)
+#         ds = _create_tensor(val)
 #     else:
 #         ds = to_bytes(val, unit)
 #         ds = ds / (constants.pebi / 8)

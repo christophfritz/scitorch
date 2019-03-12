@@ -1,6 +1,6 @@
 """Conversion of different energy types (e.g. eV, Joule,..)."""
 
-from scitorch.tools._tensors import T
+from scitorch.tools._tensors import _create_tensor
 from scitorch.constants import constants
 
 def to_joule(val=0.0, unit='J', dim=False):
@@ -35,7 +35,7 @@ def to_joule(val=0.0, unit='J', dim=False):
 
     """
 
-    energy = T(val)
+    energy = _create_tensor(val)
     if unit == 'J':
         energy = energy
     elif unit == 'KJ':
