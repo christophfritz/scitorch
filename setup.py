@@ -31,6 +31,7 @@ setup(name='scitorch',
           'torch',
           'torchvision',
           'pytest',
+          'sympy',
       ],
       scripts=[
           'scitorch/scripts/scitorch'

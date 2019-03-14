@@ -8,13 +8,8 @@ Welcome to SciTorch's documentation!
 
 .. toctree::
    :maxdepth: 2
+   :name: mastertoc
    :caption: Contents:
-
-.. automodule:: scitorch.core
-
-.. autoclass:: Tensor
-   :members:
-
 
 
 Indices and tables
