@@ -9,9 +9,9 @@ import re
 parser = argparse.ArgumentParser(description='Information about GPU systems.')
 parser.add_argument('--cuda', help='checks system if GPU is available and prints out information if available.',
                     action='store_true')
-parser.add_argument('--gpu', help='set GPU device number (int) - check --cuda',
+parser.add_argument('--gpu', help='set GPU device number - check if GPU is available with --cuda',
                     action='store_true')
-parser.add_argument('--cpu', help='set device to CPU with --cpu 0 (int)',
+parser.add_argument('--cpu', help='set device to CPU with --cpu',
                     action='store_true')
 parser.add_argument('--test', help='set device to CPU or GPU and run tests',
                     action='store_true')
@@ -40,8 +40,10 @@ def run_tests():
 gpu_available = torch.cuda.is_available()
 
 if gpu_available == False:
-    print(f'Check if GPU is available ....... {gpu_available}')
-    print(f'No GPU devices found on this machine. - Set device to CPU.')
+    print(f'---------------- INFO ---------------- \n'
+          f'Check if GPU is available ....... {gpu_available} \n'
+          f'No GPU devices found on this machine. - Set device to CPU. \n'
+          f'-------------- END INFO --------------')
     set_device('cpu')
 elif args.cuda:
     print(f'Check if GPU is available ....... {gpu_available}')

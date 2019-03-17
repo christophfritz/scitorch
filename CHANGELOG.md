@@ -10,4 +10,4 @@ Most recent releases  are shown at the top. Each release shows:
 
 ### New
 
-- Temperature conversion for Kelvin, Fahrenheit and Celsius
+- 

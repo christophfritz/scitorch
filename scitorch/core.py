@@ -1,6 +1,6 @@
 import torch
 
-from scitorch.tools._tensors import _create_tensor
+from scitorch.tools._tensors import _create_tensor, _get_local_variables
 from sympy import sympify
 
 
@@ -15,7 +15,7 @@ class Tensor(object):
 
         # Sympify also allows numbers as input. Should that be restricted to strings only?
         if dim is not None:
-            self.dim = sympify(dim)
+            self.dim = sympify(dim, locals=_get_local_variables())
         else:
             pass
 
